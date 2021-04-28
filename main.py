@@ -25,48 +25,9 @@ from avltree import (
 
 from linkedlist import print_list
 
-# ----------------------------------------------------------------- #
-# Some Nice Colors
-# ----------------------------------------------------------------- #
+from helpful_functions import *
 
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    FAIL = '\033[31m'
-
-# ----------------------------------------------------------------- #
-# Other helpful functions
-# ----------------------------------------------------------------- #
-
-def print_test(name):
-    print(f"{bcolors.HEADER}Test {name} function:")
-
-def print_insert(num_element, tree, value, key, color, succeed):
-    if succeed:
-        print(f"    {color}Element {num_element} inserted - Key: ", insert(tree, value, key))
-    else:
-        print(f"    {color}Element {num_element} not-inserted - Key: ", insert(tree, value, key))
-
-def schematic_tree_1():
-    print(f"{bcolors.OKBLUE}                 13")
-    print(R"              /       \ ")
-    print("             10        33")
-    print(R"           /    \    /    \ ")
-    print("          9     12  18     40")
-    print(R"         /      /     \ ")
-    print("        8     11       25")
-    print(R"       /               /")
-    print("      7               24")
-
-def schematic_tree_2():
-    print(f" {bcolors.OKBLUE}             /")
-    print("             10")
-    print(R"           /    \ ")
-    print("          8   SubTree")
-    print(R"        /   \ ")
-    print("       7     9")
+from some_colors import bcolors 
 
 # ----------------------------------------------------------------- #
 # Test Tree functions
@@ -96,50 +57,12 @@ print_test("subtree_height")
 print(f"{bcolors.OKCYAN}Height: ", subtree_height(tree.root), "\n")
 
 #                       #
-# RRotate Test          #
+# RigthRotate Test      #
 #                       #
 
 print_test("Right Rotate")
-print("Trying to rotate subtree key 9:")
+print(f"{bcolors.OKGREEN}Trying to rotate subtree - key 9: Done")
 rotateRight(tree, tree.root.leftnode.leftnode)
 print(f"{bcolors.OKCYAN}Height: ", subtree_height(tree.root.leftnode), "\n")
 schematic_tree_2()
 print()
-
-
-
-# print("Test update function:")
-# print("Updating element from key 13:\nSucceed: ", update(tree, -6, 13))
-# print("Updating element from key 40:\nSucceed: ", update(tree, -6, 40))
-# print("Updating element from non-existent key:\nReturned: ", update(tree, 7, 1))
-# print()
-# print("Test delete function:")
-# print("Deleting the value 12, key 40:\nDeleted, Key: ", delete(tree, 12))
-# print("Trying to delete a non-exsitent node:")
-# print("Deleting the value 13:\nReturned: ", delete(tree, 13))
-# print()
-# print("Test height:")
-# print()
-# print("Test traversePostOrder function:")
-# Lista = traversePostOrder(tree)
-# print("Tested, List of tree elements:")
-# print_list(Lista)
-# print()
-# print("Test traversePostOrder function:")
-# reBalance(tree, tree.root)
-# Lista = traversePostOrder(tree)
-# print("Tested, List of balancedtree elements:")
-# print_list(Lista)
-# print()
-# calulate_height(tree)
-# update_bf(tree, tree.root)
-# print("Test traversePostOrder balancefactor function:")
-# Lista = traversePostOrder_balanceFactor(tree)
-# print("Tested, List of tree elements:")
-# print_list(Lista)
-# print()
-# calulate_height(tree)
-# print("Test traversePostOrder heights function:")
-# Lista = traversePostOrder_height(tree)
-# print("Tested, List of tree elements:")
-# print_list(Lista)

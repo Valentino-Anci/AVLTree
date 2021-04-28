@@ -45,6 +45,30 @@ def access_wrapper(currentNode, key):
         return None
 
 #                       #
+# Delete Function       #
+#                       #
+
+def delete(A, element):
+    key = search(A, element)
+    if key != None:
+        delete_key(A.root, key)
+    return key
+
+def delete_key(currentNode, key):
+    if currentNode.key > key:
+        if currentNode.leftnode != None:
+            if currentNode.leftnode.key == key:
+                currentNode.leftnode = None
+            else:
+                delete_key(currentNode.leftnode, key)
+    elif currentNode.key < key:
+        if currentNode.rightnode != None:
+            if currentNode.rightnode.key == key:
+                currentNode.rightnode = None
+            else:
+                delete_key(currentNode.rightnode, key)
+
+#                       #
 # Height Functions      #
 #                       #
 
@@ -60,9 +84,9 @@ def height_wrapper(currentNode, i):
     if currentNode.rightnode:
         height_wrapper(currentNode.rightnode, i+1)
 
-#                         #
-# Height of NodeFunctions #
-#                         #
+#                          #
+# Height of Node Functions #
+#                          #
 
 def subtree_height(ANode):
     if ANode:
@@ -184,7 +208,7 @@ def traversePostOrderR(currentNode, List, field_you_want_to_print):
             insert_in_list(List, currentNode.value , length(List))
         elif field_you_want_to_print == "balanceFactor":
             insert_in_list(List, currentNode.balanceFactor , length(List))
-        elif: field_you_want_to_print == "height":
+        elif field_you_want_to_print == "height":
             insert_in_list(List, currentNode.height , length(List))
         else:
             insert_in_list(List, currentNode.key , length(List))
@@ -362,26 +386,3 @@ def reBalance_wrapper(A, currentNode):
 # Ejercicio 5
 # ----------------------------------------------------------------- #
 
-#                       #
-# Delete Function       #
-#                       #
-
-def delete(A, element):
-    key = search(A, element)
-    if key != None:
-        delete_key(A.root, key)
-    return key
-
-def delete_key(currentNode, key):
-    if currentNode.key > key:
-        if currentNode.leftnode != None:
-            if currentNode.leftnode.key == key:
-                currentNode.leftnode = None
-            else:
-                delete_key(currentNode.leftnode, key)
-    elif currentNode.key < key:
-        if currentNode.rightnode != None:
-            if currentNode.rightnode.key == key:
-                currentNode.rightnode = None
-            else:
-                delete_key(currentNode.rightnode, key)
