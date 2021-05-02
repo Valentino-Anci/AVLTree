@@ -5,18 +5,20 @@
 from linkedlist import LinkedList, insert_in_list, length, print_list
 
 # ----------------------------------------------------------------- #
-# Class Binay Search Tree
+# Class AVLTree
 # ----------------------------------------------------------------- #
 
-class BSTree:
+class AVLTree:
     root = None
 
-class BSNode:
+class AVLNode:
     parent = None
     leftnode = None
     rightnode = None
     key = None 
     value = None
+    balanceFactor = None
+    height = None
 
 # ----------------------------------------------------------------- #
 # AVL Basic Functions
@@ -67,11 +69,27 @@ def delete_key(currentNode, key):
                 delete_key(currentNode.rightnode, key)
 
 #                       #
+# Height Functions      #
+#                       #
+
+def calulate_height(ATree):
+    if ATree.root:
+        i = 0
+        height_wrapper(ATree.root, i)
+
+def height_wrapper(currentNode, i):
+    currentNode.height = i
+    if currentNode.leftnode:
+        height_wrapper(currentNode.leftnode, i+1)
+    if currentNode.rightnode:
+        height_wrapper(currentNode.rightnode, i+1)
+
+#                       #
 # Insert Function       #
 #                       #
 
 def insert(A, element, key):
-    newNode = BSNode()
+    newNode = AVLNode()
     newNode.key = key
     newNode.value = element
     if A.root != None:
@@ -163,7 +181,40 @@ def traverseInOrderR(currentNode, List):
         traverseInOrderR(currentNode.rightnode, List)
     else:
         return None
-        
+
+#                       #
+# Traverse post-order   #
+#                       #
+
+def traversePostOrder(A, field_you_want_to_print):
+    List = None
+    if A.root: 
+        List = LinkedList()
+        if (
+            field_you_want_to_print != "value" and
+            field_you_want_to_print != "key" and
+            field_you_want_to_print != "balanceFactor" and
+            field_you_want_to_print != "hegiht"
+        ):
+            print("     The field you want to print is invalid, key field'll be printed")
+        traversePostOrderR(A.root, List, field_you_want_to_print)
+    return List
+
+def traversePostOrderR(currentNode, List, field_you_want_to_print):
+    if currentNode:
+        if field_you_want_to_print == "value":
+            insert_in_list(List, currentNode.value , length(List))
+        elif field_you_want_to_print == "balanceFactor":
+            insert_in_list(List, currentNode.balanceFactor , length(List))
+        elif field_you_want_to_print == "height":
+            insert_in_list(List, currentNode.height , length(List))
+        else:
+            insert_in_list(List, currentNode.key , length(List))
+        traversePostOrderR(currentNode.leftnode, List, field_you_want_to_print)
+        traversePostOrderR(currentNode.rightnode, List, field_you_want_to_print)
+    else:
+        return None
+
 #                       #
 # Update Function       #
 #                       #
